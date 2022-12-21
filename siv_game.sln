@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "siv_game", "siv_game\siv_game.vcxproj", "{7B56A724-D881-497B-A316-96BFDD8864FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B56A724-D881-497B-A316-96BFDD8864FD}.Debug|x64.ActiveCfg = Debug|x64
+		{7B56A724-D881-497B-A316-96BFDD8864FD}.Debug|x64.Build.0 = Debug|x64
+		{7B56A724-D881-497B-A316-96BFDD8864FD}.Release|x64.ActiveCfg = Release|x64
+		{7B56A724-D881-497B-A316-96BFDD8864FD}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {124B471D-0F57-4D8B-87FB-7E2FB10C82B6}
+	EndGlobalSection
+EndGlobal
