@@ -1,0 +1,29 @@
+ ./csv_to_json_tool
+./monsters_data.xlsx
+1
+ ./csv_to_json_tool
+./players_data.xlsx
+1
+ ./csv_to_json_tool
+./bullets_data.xlsx
+1
+ ./csv_to_json_tool
+./items_data.xlsx
+1
+ ./csv_to_json_tool
+./words_data.xlsx
+1
+
+
+
+flatc --cpp monsters_type.fbs
+flatc --cpp players_type.fbs
+flatc --cpp bullets_type.fbs
+flatc --cpp items_type.fbs
+flatc --cpp words_type.fbs
+
+flatc -b monsters_type.fbs monsters_data.json
+flatc -b players_type.fbs players_data.json
+flatc -b bullets_type.fbs bullets_data.json
+flatc -b items_type.fbs items_data.json
+flatc -b words_type.fbs words_data.json

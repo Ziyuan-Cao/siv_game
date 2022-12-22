@@ -1,0 +1,24 @@
+﻿{
+    "items_data":  [
+                       {
+                           "item_type":  "ITEM_TYPE_ADD_HP",
+                           "name":  "WORDS_TYPE_ITEM_NAME",
+                           "time":  10,
+                           "color0":  0.9,
+                           "color1":  0.1,
+                           "color2":  0.1,
+                           "scale":  0.5,
+                           "item_was_picked_words_type":  "WORDS_TYPE_ITEM_WAS_PICKED"
+                       },
+                       {
+                           "item_type":  "ITEM_TYPE_ADD_HP",
+                           "name":  "WORDS_TYPE_ITEM_NAME",
+                           "time":  10,
+                           "color0":  0.9,
+                           "color1":  0.1,
+                           "color2":  0.1,
+                           "scale":  0.5,
+                           "item_was_picked_words_type":  "WORDS_TYPE_ITEM_WAS_PICKED"
+                       }
+                   ]
+}

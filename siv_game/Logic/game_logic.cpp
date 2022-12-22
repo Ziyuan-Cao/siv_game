@@ -8,7 +8,7 @@ void main_logic::loop()
 
 	Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
 
-	// 通常のフォントを作成 | Create a new font
+	// 通常のフォントを作成 | Create a font
 	const Font font{ 60 };
 
 	while (System::Update())

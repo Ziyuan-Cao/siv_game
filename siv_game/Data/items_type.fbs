@@ -1,0 +1,20 @@
+namespace fbs_bandai_siv_game_bin_input;
+
+table item 
+{
+	item_type:string;
+	name:string;
+	time:short = 10;
+	color0:float = 0.9;
+	color1:float = 0.1;
+	color2:float = 0.1;
+	scale:float = 0.5;
+	item_was_picked_words_type:string;
+}
+
+table items_type
+{
+	items_data:[item];
+}
+
+root_type items_type;

@@ -1,0 +1,24 @@
+namespace fbs_bandai_siv_game_bin_input;
+
+table player 
+{
+	player_type:string;
+	name:string;
+	hp:short = 10;
+	speed:short = 10;
+	bullet_number:short = 10;
+	color0:float = 0.4;
+	color1:float = 0.8;
+	color2:float = 0.6;
+	scale:float = 1;
+	player_attack_words_type:string;
+	player_hard_attack_words_type:string;
+	player_was_hit_words_type:string;
+}
+
+table players_type
+{
+	players_data:[player];
+}
+
+root_type players_type;

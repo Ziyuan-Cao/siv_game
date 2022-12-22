@@ -1,0 +1,20 @@
+namespace fbs_bandai_siv_game_bin_input;
+
+table bullet 
+{
+	bullet_type:string;
+	name:string;
+	speed:short = 10;
+	color0:float = 0.0;
+	color1:float = 0.0;
+	color2:float = 0.6;
+	scale:float = 0.3;
+	bullet_boom_words_type:string;
+}
+
+table bullets_type
+{
+	bullets_data:[bullet];
+}
+
+root_type bullets_type;

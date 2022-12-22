@@ -1,0 +1,32 @@
+﻿{
+    "players_data":  [
+                         {
+                             "player_type":  "PLAYER_TYPE_NORMAL",
+                             "name":  "WORDS_TYPE_PLAYER_NAME",
+                             "hp":  10,
+                             "speed":  10,
+                             "bullet_number":  10,
+                             "color0":  0.4,
+                             "color1":  0.8,
+                             "color2":  0.6,
+                             "scale":  1,
+                             "player_attack_words_type":  "WORDS_TYPE_PLAYER_ATTACK",
+                             "player_hard_attack_words_type":  "WORDS_TYPE_PLAYER_HARD_ATTACK",
+                             "player_was_hit_words_type":  "WORDS_TYPE_PLAYER_WAS_HIT"
+                         },
+                         {
+                             "player_type":  "PLAYER_TYPE_NORMAL",
+                             "name":  "WORDS_TYPE_PLAYER_NAME",
+                             "hp":  10,
+                             "speed":  10,
+                             "bullet_number":  10,
+                             "color0":  0.4,
+                             "color1":  0.8,
+                             "color2":  0.6,
+                             "scale":  1,
+                             "player_attack_words_type":  "WORDS_TYPE_PLAYER_ATTACK",
+                             "player_hard_attack_words_type":  "WORDS_TYPE_PLAYER_HARD_ATTACK",
+                             "player_was_hit_words_type":  "WORDS_TYPE_PLAYER_WAS_HIT"
+                         }
+                     ]
+}

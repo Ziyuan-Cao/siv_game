@@ -1,5 +1,6 @@
 ﻿#include "concrete_command.h"
 #include "Object/s_timer.h"
+#include "Object/s_factory.h"
 #include "s_math.h"
 #include <cstdlib>.
 #include <algorithm>
@@ -16,38 +17,38 @@ void generate_monster_command::execute()
 		sence_ptr->prev_monster_generate_time = time_ptr->total_time();
 		
 		//random position
-		s_monster* new_monster_ptr = new s_monster();
+		s_monster* monster_ptr = s_factory::get_instance()->create_monster();
 		//left
 		int generate_dir = rand() % 4;
 		if (generate_dir == 0)
 		{
-			new_monster_ptr->position[0] = rand() % (sence_ptr->map_width *2) - sence_ptr->map_width;
-			new_monster_ptr->position[1] = 2;
-			new_monster_ptr->position[2] = -sence_ptr->map_length;
+			monster_ptr->position[0] = rand() % (sence_ptr->map_width *2) - sence_ptr->map_width;
+			monster_ptr->position[1] = 2;
+			monster_ptr->position[2] = -sence_ptr->map_length;
 		}//right
 		else if (generate_dir == 1)
 		{
-			new_monster_ptr->position[0] = rand() % (sence_ptr->map_width * 2) - sence_ptr->map_width;
-			new_monster_ptr->position[1] = 2;
-			new_monster_ptr->position[2] = sence_ptr->map_length;
+			monster_ptr->position[0] = rand() % (sence_ptr->map_width * 2) - sence_ptr->map_width;
+			monster_ptr->position[1] = 2;
+			monster_ptr->position[2] = sence_ptr->map_length;
 		}//top
 		else if (generate_dir == 2)
 		{
-			new_monster_ptr->position[0] = sence_ptr->map_width;
-			new_monster_ptr->position[1] = 2;
-			new_monster_ptr->position[2] = rand() % (sence_ptr->map_length *2) - sence_ptr->map_length;
+			monster_ptr->position[0] = sence_ptr->map_width;
+			monster_ptr->position[1] = 2;
+			monster_ptr->position[2] = rand() % (sence_ptr->map_length *2) - sence_ptr->map_length;
 		}//buttom
 		else
 		{
-			new_monster_ptr->position[0] = -sence_ptr->map_width;
-			new_monster_ptr->position[1] = 2;
-			new_monster_ptr->position[2] = rand() % (sence_ptr->map_length * 2) - sence_ptr->map_length;
+			monster_ptr->position[0] = -sence_ptr->map_width;
+			monster_ptr->position[1] = 2;
+			monster_ptr->position[2] = rand() % (sence_ptr->map_length * 2) - sence_ptr->map_length;
 		}
-		new_monster_ptr->srearch_object = sence_ptr->player;
-		new_monster_ptr->monster_behavior_tree_cmd = new monster_behavior_tree_command(new_monster_ptr, sence_ptr);
+		monster_ptr->srearch_object = sence_ptr->player;
+		monster_ptr->monster_behavior_tree_cmd = new monster_behavior_tree_command(monster_ptr, sence_ptr);
 		//add monster in collision tree map
-		sence_ptr->get_monster_map_set(new_monster_ptr->position[0], new_monster_ptr->position[2]).insert(new_monster_ptr);
-		sence_ptr->monster_group.insert(new_monster_ptr);
+		sence_ptr->get_monster_map_set(monster_ptr->position[0], monster_ptr->position[2]).insert(monster_ptr);
+		sence_ptr->monster_group.insert(monster_ptr);
 	}
 }
 
@@ -69,17 +70,17 @@ void player_control_command::execute()
 	{
 		player_ptr->position[0] -= player_ptr->speed * time_ptr->detail_time();
 	}
-	if (KeyD.down())
+	if (KeyD.pressed())
 	{
 		player_ptr->position[0] += player_ptr->speed * time_ptr->detail_time();
 	}
 
-	if (MouseL.pressed())
+	if (MouseL.down())
 	{
 		//add atk text
 		auto screen_pos = sence_ptr->camera_ptr->worldToScreenPoint({ player_ptr->position[0] ,player_ptr->position[1] ,player_ptr->position[2] });
 		s_text text_atk;
-		text_atk.text = "gengengengengen";
+		text_atk.text = s_factory::get_instance()->get_words_siv_string(player_ptr->player_attack_words_type);
 		add_text_command add_text_cmd(sence_ptr, text_atk, time_ptr->total_time(), screen_pos.x, screen_pos.y);
 		add_text_cmd.execute();
 
@@ -127,13 +128,13 @@ void monster_move_command::execute()
 	//player direction
 	double move_dir[3] = { 0 };
 	direction_cal(monster_ptr->position, monster_ptr->srearch_object->position, move_dir[0], move_dir[1], move_dir[2]);
-	//renew monster postion in collision tree map
+	//update monster postion in collision tree map
 	sence_ptr->get_monster_map_set(monster_ptr->position[0], monster_ptr->position[2]).erase(monster_ptr);
 
 	monster_ptr->position[0] += move_dir[0] * monster_ptr->speed * time_ptr->detail_time();
 	monster_ptr->position[2] += move_dir[2] * monster_ptr->speed * time_ptr->detail_time();
 
-	//renew monster postion in collision tree map
+	//update monster postion in collision tree map
 	sence_ptr->get_monster_map_set(monster_ptr->position[0], monster_ptr->position[2]).insert(monster_ptr);
 }
 
@@ -162,18 +163,18 @@ void generate_bullet_command::execute()
 	//world_mouse_direction = world_mouse;
 	//Sphere(world_mouse_direction, 2).draw(ColorF{ 1.0, 1.0, 1.0 }.removeSRGBCurve());
 
-	s_bullet* new_bullet_ptr = new s_bullet();
-	new_bullet_ptr->move_dir[0] = bullet_dir.x;
-	new_bullet_ptr->move_dir[1] = bullet_dir.y;
-	new_bullet_ptr->move_dir[2] = bullet_dir.z;
+	s_bullet* bullet_ptr = s_factory::get_instance()->create_bullet();
+	bullet_ptr->move_dir[0] = bullet_dir.x;
+	bullet_ptr->move_dir[1] = bullet_dir.y;
+	bullet_ptr->move_dir[2] = bullet_dir.z;
 
-	new_bullet_ptr->position[0] = sence_ptr->player->position[0];
-	new_bullet_ptr->position[1] = sence_ptr->player->position[1];
-	new_bullet_ptr->position[2] = sence_ptr->player->position[2];
+	bullet_ptr->position[0] = sence_ptr->player->position[0];
+	bullet_ptr->position[1] = sence_ptr->player->position[1];
+	bullet_ptr->position[2] = sence_ptr->player->position[2];
 
-	new_bullet_ptr->bullet_behavior_tree_cmd = new bullet_behavior_tree_command(new_bullet_ptr,sence_ptr);
+	bullet_ptr->bullet_behavior_tree_cmd = new bullet_behavior_tree_command(bullet_ptr,sence_ptr);
 
-	sence_ptr->bullet_group.insert(new_bullet_ptr);
+	sence_ptr->bullet_group.insert(bullet_ptr);
 
 }
 
@@ -221,7 +222,7 @@ void check_collision_command::execute()
 				//add atk text
 				auto screen_pos = sence_ptr->camera_ptr->worldToScreenPoint({ monster_ptr->position[0] ,monster_ptr->position[1] ,monster_ptr->position[2]});
 				s_text text_atk;
-				text_atk.text = "E!~A!";
+				text_atk.text = s_factory::get_instance()->get_words_siv_string(monster_ptr->monster_attack_words_type);
 				add_text_command add_text_cmd(sence_ptr, text_atk, time_ptr->total_time(), screen_pos.x, screen_pos.y);
 				add_text_cmd.execute();
 
@@ -246,10 +247,10 @@ void check_collision_command::execute()
 			s_bullet* bullet_ptr = *it;
 			//add atk text
 			auto screen_pos = sence_ptr->camera_ptr->worldToScreenPoint({ bullet_ptr->position[0] ,bullet_ptr->position[1] ,bullet_ptr->position[2] });
-			s_text text_atk;
-			text_atk.text = "BOOM";
-			text_atk.size = 60;
-			add_text_command add_text_cmd(sence_ptr, text_atk, time_ptr->total_time(), screen_pos.x, screen_pos.y);
+			s_text text_boom;
+			text_boom.text = s_factory::get_instance()->get_words_siv_string(bullet_ptr->bullet_boom_words_type);
+			text_boom.size = 60;
+			add_text_command add_text_cmd(sence_ptr, text_boom, time_ptr->total_time(), screen_pos.x, screen_pos.y);
 			add_text_cmd.execute();
 
 			delete bullet_ptr;
@@ -270,10 +271,10 @@ void check_collision_command::execute()
 		{
 			//add atk text
 			auto screen_pos = sence_ptr->camera_ptr->worldToScreenPoint({ monster_ptr->position[0] ,monster_ptr->position[1] ,monster_ptr->position[2] });
-			s_text text_atk;
-			text_atk.text = "HHHHHHHHH";
-			text_atk.size = 60;
-			add_text_command add_text_cmd(sence_ptr, text_atk, time_ptr->total_time(), screen_pos.x, screen_pos.y);
+			s_text text_hit;
+			text_hit.text = s_factory::get_instance()->get_words_siv_string(monster_ptr->monster_was_hit_words_type);
+			text_hit.size = 60;
+			add_text_command add_text_cmd(sence_ptr, text_hit, time_ptr->total_time(), screen_pos.x, screen_pos.y);
 			add_text_cmd.execute();
 
 			sence_ptr->monster_group.erase(monster_ptr);
@@ -317,7 +318,7 @@ void refresh_text_command::execute()
 		}
 
 		(*it).screen_position[1] -= (*it).speed * time_ptr->detail_time();
-		auto font_text = SimpleGUI::GetFont()(U"aaaaaaaaaaaaaaaaaaaaa").draw((*it).screen_position[0], (*it).screen_position[1], ColorF{ 0.11 });
+		auto font_text = SimpleGUI::GetFont()((*it).text).draw((*it).screen_position[0], (*it).screen_position[1], ColorF{ 0.11 });
 		it++;
 	}
 }

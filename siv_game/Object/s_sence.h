@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "s_object.h"
+#include "s_factory.h"
 #include "Command/s_command.h"
 #include <vector>
 #include <set>
@@ -30,8 +31,8 @@ struct s_sence
 	{
 		monster_hash_map.assign(map_width*2 +1, vector<set<s_monster*>>(map_length*2 +1, set<s_monster*>()));
 
+		player = s_factory::get_instance()->create_player();
 
-		player = new s_player();
 		level_map = new s_map();
 		player->position[1] = 2;
 		level_map->scale = map_width * 2 +4;

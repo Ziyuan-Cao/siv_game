@@ -1,0 +1,28 @@
+﻿{
+    "monsters_data":  [
+                          {
+                              "monster_type":  "MONSTER_TYPE_NORMAL",
+                              "name":  "WORDS_TYPE_MONSTER_NAME",
+                              "hp":  10,
+                              "speed":  1,
+                              "color0":  0.8,
+                              "color1":  0.6,
+                              "color2":  0.4,
+                              "scale":  1,
+                              "monster_attack_words_type":  "WORDS_TYPE_MONSTER_ATTACK",
+                              "monster_was_hit_words_type":  "WORDS_TYPE_MONSTER_WAS_HIT"
+                          },
+                          {
+                              "monster_type":  "MONSTER_TYPE_NORMAL",
+                              "name":  "WORDS_TYPE_MONSTER_NAME",
+                              "hp":  10,
+                              "speed":  1,
+                              "color0":  0.8,
+                              "color1":  0.6,
+                              "color2":  0.4,
+                              "scale":  1,
+                              "monster_attack_words_type":  "WORDS_TYPE_MONSTER_ATTACK",
+                              "monster_was_hit_words_type":  "WORDS_TYPE_MONSTER_WAS_HIT"
+                          }
+                      ]
+}

@@ -288,6 +288,21 @@
     <None Include="App\example\toml\config.toml" />
     <None Include="App\example\toml\test.toml" />
     <None Include="App\example\zip\zip_test.zip" />
+    <None Include="Data\bullets_type.fbs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Data\items_type.fbs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Data\monsters_type.fbs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Data\players_type.fbs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Data\words_type.fbs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Media Include="App\example\shot.mp3" />
@@ -401,6 +416,11 @@
   <ItemGroup>
     <ClInclude Include="Command\concrete_command.h" />
     <ClInclude Include="Command\s_command.h" />
+    <ClInclude Include="Data\bullets_type_generated.h" />
+    <ClInclude Include="Data\items_type_generated.h" />
+    <ClInclude Include="Data\monsters_type_generated.h" />
+    <ClInclude Include="Data\players_type_generated.h" />
+    <ClInclude Include="Data\words_type_generated.h" />
     <ClInclude Include="Logic\game_logic.h" />
     <ClInclude Include="Object\s_factory.h" />
     <ClInclude Include="Object\s_object.h" />

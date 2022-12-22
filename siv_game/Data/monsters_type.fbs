@@ -1,0 +1,22 @@
+namespace fbs_bandai_siv_game_bin_input;
+
+table monster 
+{
+	monster_type:string;
+	name:string;
+	hp:short = 10;
+	speed:short = 1;
+	color0:float = 0.8;
+	color1:float = 0.6;
+	color2:float = 0.4;
+	scale:float = 1;
+	monster_attack_words_type:string;
+	monster_was_hit_words_type:string;
+}
+
+table monsters_type
+{
+	monsters_data:[monster];
+}
+
+root_type monsters_type;
