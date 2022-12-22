@@ -15,7 +15,6 @@
 1
 
 
-
 flatc --cpp monsters_type.fbs
 flatc --cpp players_type.fbs
 flatc --cpp bullets_type.fbs

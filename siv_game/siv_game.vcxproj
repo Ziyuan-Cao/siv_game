@@ -80,10 +80,19 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <DelayLoadDLLs>advapi32.dll;crypt32.dll;dwmapi.dll;gdi32.dll;imm32.dll;ole32.dll;oleaut32.dll;opengl32.dll;shell32.dll;shlwapi.dll;user32.dll;winmm.dll;ws2_32.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <AdditionalDependencies>flatbuffers.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I /D /Y "$(OutDir)$(TargetFileName)" "$(ProjectDir)App"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>copy $(ProjectDir)Data\monsters_data.bin $(ProjectDir)App\Data
+copy $(ProjectDir)Data\players_data.bin $(ProjectDir)App\Data
+copy $(ProjectDir)Data\bullets_data.bin $(ProjectDir)App\Data
+copy $(ProjectDir)Data\items_data.bin $(ProjectDir)App\Data
+copy $(ProjectDir)Data\words_data.bin $(ProjectDir)App\Data
+</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

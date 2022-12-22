@@ -3,6 +3,15 @@
 #include  <string>
 # include <Siv3D.hpp>
 
+enum LANGUAGE_TYPE
+{
+	LANGUAGE_TYPE_JAPANESE = 0,
+	LANGUAGE_TYPE_CANTONESE = 1,
+	LANGUAGE_TYPE_ENGLISH = 2,
+	LANGUAGE_TYPE_UNKNOW = 3,
+	LANGUAGE_TYPE_NUMBER = 4
+};
+
 enum WORDS_TYPE
 {
 	WORDS_TYPE_MONSTER_ATTACK = 0,
@@ -21,25 +30,21 @@ enum WORDS_TYPE
 	WORDS_TYPE_EXIT_GAME_BUTTON_NAME = 13,
 	WORDS_TYPE_RETURN_MAIN_MENU_BUTTON_NAME = 14,
 	WORDS_TYPE_GAME_TITLE_NAME = 15,
-	WORDS_TYPE_NUMBER = 16
+	WORDS_TYPE_GAME_OVER_TITLE_NAME = 16,
+	WORDS_TYPE_PLAYER_STATE_HP_NAME = 17,
+	WORDS_TYPE_PLAYER_STATE_BULLET_NUMBER_NAME = 18,
+	WORDS_TYPE_PLAYER_STATE_TIME_NAME = 19,
+	WORDS_TYPE_SCORE_NAME = 20,
+	WORDS_TYPE_NUMBER = 21
 };
 
 enum MONSTER_TYPE
 {
 	MONSTER_TYPE_NORMAL = 0,
-	MONSTER_TYPE_NUMBER = 1
-};
-
-enum ITEM_TYPE
-{
-	ITEM_TYPE_ADD_HP = 0,
-	ITEM_TYPE_NUMBER = 1
-};
-
-enum BULLET_TYPE
-{
-	BULLET_TYPE_NORMAL = 0,
-	BULLET_TYPE_NUMBER = 1
+	MONSTER_TYPE_DOG = 1,
+	MONSTER_TYPE_BOSS = 2,
+	MONSTER_TYPE_BOMB = 3,
+	MONSTER_TYPE_NUMBER = 4
 };
 
 enum PLAYER_TYPE
@@ -48,6 +53,26 @@ enum PLAYER_TYPE
 	PLAYER_TYPE_NUMBER = 1
 };
 
+enum BULLET_TYPE
+{
+	BULLET_TYPE_NORMAL = 0,
+	BULLET_TYPE_UNLIMITED = 1,
+	BULLET_TYPE_FIREWORKS = 2,
+	BULLET_TYPE_SHOTGUN = 3,
+	BULLET_TYPE_HARD_ATTACK = 4,
+	BULLET_TYPE_NUMBER = 5
+};
+
+enum ITEM_TYPE
+{
+	ITEM_TYPE_ADD_HP = 0,
+	ITEM_TYPE_ADD_BULLET = 1,
+	ITEM_TYPE_ADD_TIME = 2,
+	ITEM_TYPE_BULLET_UNLIMITED = 3,
+	ITEM_TYPE_BULLET_FIREWORKS = 4,
+	ITEM_TYPE_BULLET_SHOTGUN = 5,
+	ITEM_TYPE_NUMBER = 6
+};
 
 template<typename t_mesh_type>
 struct s_object
@@ -139,6 +164,9 @@ struct s_player : public s_object<Sphere>
 	WORDS_TYPE player_hard_attack_words_type = WORDS_TYPE_PLAYER_HARD_ATTACK;
 	WORDS_TYPE player_was_hit_words_type = WORDS_TYPE_PLAYER_WAS_HIT;
 
+	BULLET_TYPE current_bullet_type = BULLET_TYPE_NORMAL;
+	float special_bullet_remain_time = 0;
+
 	s_player()
 	{
 		color[0] = 0.4;
@@ -187,7 +215,6 @@ struct s_player : public s_object<Sphere>
 	};
 
 	s_command* player_control_cmd = nullptr;
-	s_command* generate_bullet_cmd = nullptr;
 };
 
 struct s_bullet : public s_object<Sphere>
@@ -245,8 +272,9 @@ struct s_bullet : public s_object<Sphere>
 struct s_item : public s_object<Box>
 {
 	ITEM_TYPE item_type = ITEM_TYPE_ADD_HP;
-	int time = 10;
-
+	float item_data = 10;
+	float time = 10;
+	float generate_time = 0;
 	WORDS_TYPE item_was_picked_words_type = WORDS_TYPE_ITEM_WAS_PICKED;
 
 	s_item()
@@ -260,6 +288,7 @@ struct s_item : public s_object<Box>
 	{
 		item_type = in_item.item_type;
 		name = in_item.name;
+		item_data = in_item.item_data;
 		time = in_item.time;
 		color[0] = in_item.color[0];
 		color[1] = in_item.color[1];
@@ -273,6 +302,7 @@ struct s_item : public s_object<Box>
 		s_item res_item;
 		res_item.item_type = in_item.item_type;
 		res_item.name = in_item.name;
+		res_item.item_data = in_item.item_data;
 		res_item.time = in_item.time;
 		res_item.color[0] = in_item.color[0];
 		res_item.color[1] = in_item.color[1];

@@ -4,6 +4,7 @@ table item
 {
 	item_type:string;
 	name:string;
+	item_data:float = 10;
 	time:short = 10;
 	color0:float = 0.9;
 	color1:float = 0.1;

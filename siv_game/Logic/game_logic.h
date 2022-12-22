@@ -10,6 +10,20 @@ public:
 	virtual void loop() = 0;
 };
 
+class init_process
+{
+private:
+	init_process() {};
+public:
+	static init_process* get_instance()
+	{
+		static init_process init_process_instance;
+		return &init_process_instance;
+	}
+
+	void init_game();
+};
+
 class main_logic : public s_logic
 {
 private:
@@ -41,9 +55,11 @@ class game_over_logic : public s_logic
 private:
 	game_over_logic() {};
 public:
+	int score = 0;
 	static game_over_logic* get_instance()
 	{
 		static game_over_logic game_over_logic_instance;
+		game_over_logic_instance.score = 0;
 		return &game_over_logic_instance;
 	}
 	virtual void loop() override;

@@ -11,9 +11,14 @@ using std::set;
 struct s_sence
 {
 	float prev_monster_generate_time = 0;
+	float prev_item_generate_time = 0;
+	float item_cooler_time = 1;
 	float monster_cooler_time = 1;
 	int map_width = 30;
 	int map_length = 30;
+	float remain_time = 30;
+	float score = 0;
+	int monster_period = 30;
 
 	set<s_monster*> monster_group;
 	set<s_bullet*> bullet_group;
@@ -24,18 +29,17 @@ struct s_sence
 
 	vector<vector<set<s_monster*>>> monster_hash_map;
 	vector<s_text> text_group;
-	s_command* generate_monster_cmd = nullptr;
-	s_command* generate_item_cmd = nullptr;
-
+	
 	s_sence()
 	{
-		monster_hash_map.assign(map_width*2 +1, vector<set<s_monster*>>(map_length*2 +1, set<s_monster*>()));
+		monster_hash_map.assign(map_width*4, vector<set<s_monster*>>(map_length*4, set<s_monster*>()));
 
 		player = s_factory::get_instance()->create_player();
-
+		player->update_state();
 		level_map = new s_map();
 		player->position[1] = 2;
 		level_map->scale = map_width * 2 +4;
+		level_map->update_state();
 	}
 
 	~s_sence()
@@ -64,8 +68,11 @@ struct s_sence
 
 	set<s_monster*>& get_monster_map_set(double in_x,double in_z)
 	{
-		int map_x_index = in_x + map_width;
-		int map_z_index = in_z + map_length;
+		int map_x_index = in_x + map_width *2;
+		int map_z_index = in_z + map_length *2;
 		return monster_hash_map[map_x_index][map_z_index];
 	}
+
+	s_command* generate_monster_cmd = nullptr;
+	s_command* generate_item_cmd = nullptr;
 };

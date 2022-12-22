@@ -12,14 +12,14 @@
                            "japanese":  "わあ！",
                            "cantonese":  "米啊！",
                            "english":  "HIT!",
-                           "unknow":  "PAW!"
+                           "unknow":  "P...AW!"
                        },
                        {
                            "word_type":  "WORDS_TYPE_PLAYER_ATTACK",
                            "japanese":  "しゃしゃしゃ！",
                            "cantonese":  "嘿嘿",
                            "english":  "Fire!",
-                           "unknow":  "IDC"
+                           "unknow":  "\u003e \u003c!"
                        },
                        {
                            "word_type":  "WORDS_TYPE_PLAYER_HARD_ATTACK",
@@ -33,7 +33,7 @@
                            "japanese":  "ェや..",
                            "cantonese":  "呃啊",
                            "english":  "Help!",
-                           "unknow":  "QQ"
+                           "unknow":  "QAQ"
                        },
                        {
                            "word_type":  "WORDS_TYPE_BULLET_BOOM",
@@ -106,11 +106,46 @@
                            "unknow":  "back"
                        },
                        {
+                           "word_type":  "WORDS_TYPE_GAME_OVER_TITLE_NAME",
+                           "japanese":  "終わり",
+                           "cantonese":  "搞掂",
+                           "english":  "Game OVER",
+                           "unknow":  "OvO"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_PLAYER_STATE_HP_NAME",
+                           "japanese":  "命",
+                           "cantonese":  "条血",
+                           "english":  "HP",
+                           "unknow":  "RED"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_PLAYER_STATE_BULLET_NUMBER_NAME",
+                           "japanese":  "玉数",
+                           "cantonese":  "子弹",
+                           "english":  "Clip",
+                           "unknow":  "🥚"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_PLAYER_STATE_TIME_NAME",
+                           "japanese":  "時間",
+                           "cantonese":  "钟",
+                           "english":  "Time",
+                           "unknow":  "⏰"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_SCORE_NAME",
+                           "japanese":  "点数",
+                           "cantonese":  "成绩",
+                           "english":  "Score",
+                           "unknow":  "Score"
+                       },
+                       {
                            "word_type":  "WORDS_TYPE_GAME_TITLE_NAME",
                            "japanese":  "戦闘",
                            "cantonese":  "打交",
                            "english":  "Battle",
-                           "unknow":  "Baototmle"
+                           "unknow":  "FIGHT!"
                        }
                    ]
 }

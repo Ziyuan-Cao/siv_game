@@ -21,7 +21,6 @@ public:
 	virtual void execute() override;
 };
 
-
 class monster_behavior_tree_command : public s_command
 {
 private:
@@ -31,7 +30,6 @@ public:
 	monster_behavior_tree_command(s_monster* in_monster_ptr, s_sence* in_sence_ptr) : monster_ptr(in_monster_ptr), sence_ptr(in_sence_ptr) {};
 	virtual void execute() override;
 };
-
 
 class player_control_command : public s_command
 {
@@ -43,17 +41,27 @@ public:
 	virtual void execute() override;
 };
 
+class player_attack_command : public s_command
+{
+private:
+	s_player* player_ptr = nullptr;
+	s_sence* sence_ptr = nullptr;
+public:
+	player_attack_command(s_player* in_player_ptr, s_sence* in_sence_ptr) : player_ptr(in_player_ptr), sence_ptr(in_sence_ptr) {};
+	virtual void execute() override;
+};
 
 class generate_bullet_command : public s_command
 {
 private:
+	BULLET_TYPE create_type = BULLET_TYPE_NORMAL;
 	s_sence* sence_ptr = nullptr;
-	BasicCamera3D* camera_ptr = nullptr;
+	Float3 bullet_dir = {0,0,0};
+	Float3 bullet_start_position = { 0,0,0 };
 public:
-	generate_bullet_command(s_sence* in_sence_ptr, BasicCamera3D* in_camera_ptr) : sence_ptr(in_sence_ptr), camera_ptr(in_camera_ptr) {};
+	generate_bullet_command(s_sence* in_sence_ptr, BULLET_TYPE in_create_type, Float3 in_bullet_dir, Float3 in_bullet_start_position) : sence_ptr(in_sence_ptr), create_type(in_create_type), bullet_dir(in_bullet_dir), bullet_start_position(in_bullet_start_position) {};
 	virtual void execute() override;
 };
-
 
 class bullet_behavior_tree_command : public s_command
 {
@@ -81,6 +89,25 @@ private:
 	s_sence* sence_ptr = nullptr;
 public:
 	check_collision_command( s_sence* in_sence_ptr) : sence_ptr(in_sence_ptr) {};
+	virtual void execute() override;
+};
+
+class generate_item_command : public s_command
+{
+private:
+	s_sence* sence_ptr = nullptr;
+public:
+	generate_item_command(s_sence* in_sence_ptr) : sence_ptr(in_sence_ptr) {};
+	virtual void execute() override;
+};
+
+class pick_item_command : public s_command
+{
+private:
+	s_sence* sence_ptr = nullptr;
+	s_item* item_ptr = nullptr;
+public:
+	pick_item_command(s_sence* in_sence_ptr, s_item* in_item_ptr) : sence_ptr(in_sence_ptr), item_ptr(in_item_ptr){};
 	virtual void execute() override;
 };
 
@@ -115,6 +142,15 @@ private:
 	s_sence* sence_ptr = nullptr;
 public:
 	refresh_text_command(s_sence* in_sence_ptr) : sence_ptr(in_sence_ptr) {};
+	virtual void execute() override;
+};
+
+class display_player_state_command : public s_command
+{
+private:
+	s_sence* sence_ptr = nullptr;
+public:
+	display_player_state_command(s_sence* in_sence_ptr) : sence_ptr(in_sence_ptr) {};
 	virtual void execute() override;
 };
 

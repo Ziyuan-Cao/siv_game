@@ -26,18 +26,22 @@ struct item FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_ITEM_TYPE = 4,
     VT_NAME = 6,
-    VT_TIME = 8,
-    VT_COLOR0 = 10,
-    VT_COLOR1 = 12,
-    VT_COLOR2 = 14,
-    VT_SCALE = 16,
-    VT_ITEM_WAS_PICKED_WORDS_TYPE = 18
+    VT_ITEM_DATA = 8,
+    VT_TIME = 10,
+    VT_COLOR0 = 12,
+    VT_COLOR1 = 14,
+    VT_COLOR2 = 16,
+    VT_SCALE = 18,
+    VT_ITEM_WAS_PICKED_WORDS_TYPE = 20
   };
   const flatbuffers::String *item_type() const {
     return GetPointer<const flatbuffers::String *>(VT_ITEM_TYPE);
   }
   const flatbuffers::String *name() const {
     return GetPointer<const flatbuffers::String *>(VT_NAME);
+  }
+  float item_data() const {
+    return GetField<float>(VT_ITEM_DATA, 10.0f);
   }
   int16_t time() const {
     return GetField<int16_t>(VT_TIME, 10);
@@ -63,6 +67,7 @@ struct item FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            verifier.VerifyString(item_type()) &&
            VerifyOffset(verifier, VT_NAME) &&
            verifier.VerifyString(name()) &&
+           VerifyField<float>(verifier, VT_ITEM_DATA, 4) &&
            VerifyField<int16_t>(verifier, VT_TIME, 2) &&
            VerifyField<float>(verifier, VT_COLOR0, 4) &&
            VerifyField<float>(verifier, VT_COLOR1, 4) &&
@@ -83,6 +88,9 @@ struct itemBuilder {
   }
   void add_name(flatbuffers::Offset<flatbuffers::String> name) {
     fbb_.AddOffset(item::VT_NAME, name);
+  }
+  void add_item_data(float item_data) {
+    fbb_.AddElement<float>(item::VT_ITEM_DATA, item_data, 10.0f);
   }
   void add_time(int16_t time) {
     fbb_.AddElement<int16_t>(item::VT_TIME, time, 10);
@@ -117,6 +125,7 @@ inline flatbuffers::Offset<item> Createitem(
     flatbuffers::FlatBufferBuilder &_fbb,
     flatbuffers::Offset<flatbuffers::String> item_type = 0,
     flatbuffers::Offset<flatbuffers::String> name = 0,
+    float item_data = 10.0f,
     int16_t time = 10,
     float color0 = 0.9f,
     float color1 = 0.1f,
@@ -129,6 +138,7 @@ inline flatbuffers::Offset<item> Createitem(
   builder_.add_color2(color2);
   builder_.add_color1(color1);
   builder_.add_color0(color0);
+  builder_.add_item_data(item_data);
   builder_.add_name(name);
   builder_.add_item_type(item_type);
   builder_.add_time(time);
@@ -139,6 +149,7 @@ inline flatbuffers::Offset<item> CreateitemDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
     const char *item_type = nullptr,
     const char *name = nullptr,
+    float item_data = 10.0f,
     int16_t time = 10,
     float color0 = 0.9f,
     float color1 = 0.1f,
@@ -152,6 +163,7 @@ inline flatbuffers::Offset<item> CreateitemDirect(
       _fbb,
       item_type__,
       name__,
+      item_data,
       time,
       color0,
       color1,
