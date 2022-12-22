@@ -5,6 +5,7 @@ table bullet
 	bullet_type:string;
 	name:string;
 	speed:short = 10;
+	damage:short = 1;
 	color0:float = 0.0;
 	color1:float = 0.0;
 	color2:float = 0.6;

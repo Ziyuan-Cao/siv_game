@@ -27,11 +27,12 @@ struct bullet FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_BULLET_TYPE = 4,
     VT_NAME = 6,
     VT_SPEED = 8,
-    VT_COLOR0 = 10,
-    VT_COLOR1 = 12,
-    VT_COLOR2 = 14,
-    VT_SCALE = 16,
-    VT_BULLET_BOOM_WORDS_TYPE = 18
+    VT_DAMAGE = 10,
+    VT_COLOR0 = 12,
+    VT_COLOR1 = 14,
+    VT_COLOR2 = 16,
+    VT_SCALE = 18,
+    VT_BULLET_BOOM_WORDS_TYPE = 20
   };
   const flatbuffers::String *bullet_type() const {
     return GetPointer<const flatbuffers::String *>(VT_BULLET_TYPE);
@@ -41,6 +42,9 @@ struct bullet FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   int16_t speed() const {
     return GetField<int16_t>(VT_SPEED, 10);
+  }
+  int16_t damage() const {
+    return GetField<int16_t>(VT_DAMAGE, 1);
   }
   float color0() const {
     return GetField<float>(VT_COLOR0, 0.0f);
@@ -64,6 +68,7 @@ struct bullet FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            VerifyOffset(verifier, VT_NAME) &&
            verifier.VerifyString(name()) &&
            VerifyField<int16_t>(verifier, VT_SPEED, 2) &&
+           VerifyField<int16_t>(verifier, VT_DAMAGE, 2) &&
            VerifyField<float>(verifier, VT_COLOR0, 4) &&
            VerifyField<float>(verifier, VT_COLOR1, 4) &&
            VerifyField<float>(verifier, VT_COLOR2, 4) &&
@@ -86,6 +91,9 @@ struct bulletBuilder {
   }
   void add_speed(int16_t speed) {
     fbb_.AddElement<int16_t>(bullet::VT_SPEED, speed, 10);
+  }
+  void add_damage(int16_t damage) {
+    fbb_.AddElement<int16_t>(bullet::VT_DAMAGE, damage, 1);
   }
   void add_color0(float color0) {
     fbb_.AddElement<float>(bullet::VT_COLOR0, color0, 0.0f);
@@ -118,6 +126,7 @@ inline flatbuffers::Offset<bullet> Createbullet(
     flatbuffers::Offset<flatbuffers::String> bullet_type = 0,
     flatbuffers::Offset<flatbuffers::String> name = 0,
     int16_t speed = 10,
+    int16_t damage = 1,
     float color0 = 0.0f,
     float color1 = 0.0f,
     float color2 = 0.6f,
@@ -131,6 +140,7 @@ inline flatbuffers::Offset<bullet> Createbullet(
   builder_.add_color0(color0);
   builder_.add_name(name);
   builder_.add_bullet_type(bullet_type);
+  builder_.add_damage(damage);
   builder_.add_speed(speed);
   return builder_.Finish();
 }
@@ -140,6 +150,7 @@ inline flatbuffers::Offset<bullet> CreatebulletDirect(
     const char *bullet_type = nullptr,
     const char *name = nullptr,
     int16_t speed = 10,
+    int16_t damage = 1,
     float color0 = 0.0f,
     float color1 = 0.0f,
     float color2 = 0.6f,
@@ -153,6 +164,7 @@ inline flatbuffers::Offset<bullet> CreatebulletDirect(
       bullet_type__,
       name__,
       speed,
+      damage,
       color0,
       color1,
       color2,

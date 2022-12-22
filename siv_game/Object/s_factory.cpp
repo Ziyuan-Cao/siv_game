@@ -105,6 +105,8 @@ void s_factory::load_object_data()
 			m_it.monster_type = m_type;
 			m_it.hp = m->hp();
 			m_it.speed = m->speed();
+			m_it.damage = m->damage();
+			m_it.score_value = m->score_value();
 			m_it.color[0] = m->color0();
 			m_it.color[1] = m->color1();
 			m_it.color[2] = m->color2();
@@ -166,6 +168,7 @@ void s_factory::load_object_data()
 			auto& b_it = bullet_type_map[b_type];
 			b_it.bullet_type = b_type;
 			b_it.speed = b->speed();
+			b_it.damage = b->damage();
 			b_it.color[0] = b->color0();
 			b_it.color[1] = b->color1();
 			b_it.color[2] = b->color2();
@@ -251,6 +254,19 @@ MONSTER_TYPE s_factory::convert_string_to_enum_type<MONSTER_TYPE>(string in_type
 	{
 		return MONSTER_TYPE_NORMAL;
 	}
+	if (in_type_name == "MONSTER_TYPE_DOG")
+	{
+		return MONSTER_TYPE_DOG;
+	}
+	if (in_type_name == "MONSTER_TYPE_BOSS")
+	{
+		return MONSTER_TYPE_BOSS;
+	}
+	if (in_type_name == "MONSTER_TYPE_BOMB")
+	{
+		return MONSTER_TYPE_BOMB;
+	}
+
 
 	//defualt
 	return MONSTER_TYPE_NORMAL;

@@ -3,7 +3,8 @@
                          {
                              "bullet_type":  "BULLET_TYPE_NORMAL",
                              "name":  "WORDS_TYPE_BULLET_NAME",
-                             "speed":  20,
+                             "speed":  30,
+                             "damage":  1,
                              "color0":  0.8,
                              "color1":  0.8,
                              "color2":  0.8,
@@ -13,7 +14,8 @@
                          {
                              "bullet_type":  "BULLET_TYPE_UNLIMITED",
                              "name":  "WORDS_TYPE_BULLET_NAME",
-                             "speed":  20,
+                             "speed":  30,
+                             "damage":  1,
                              "color0":  0.2,
                              "color1":  0.2,
                              "color2":  0.2,
@@ -24,30 +26,33 @@
                              "bullet_type":  "BULLET_TYPE_FIREWORKS",
                              "name":  "WORDS_TYPE_BULLET_NAME",
                              "speed":  20,
+                             "damage":  1,
                              "color0":  0.8,
                              "color1":  0,
                              "color2":  0,
-                             "scale":  0.3,
+                             "scale":  0.2,
                              "bullet_boom_words_type":  "WORDS_TYPE_BULLET_BOOM"
                          },
                          {
                              "bullet_type":  "BULLET_TYPE_SHOTGUN",
                              "name":  "WORDS_TYPE_BULLET_NAME",
                              "speed":  20,
+                             "damage":  10,
                              "color0":  0,
                              "color1":  0.8,
                              "color2":  0,
-                             "scale":  0.3,
+                             "scale":  1,
                              "bullet_boom_words_type":  "WORDS_TYPE_BULLET_BOOM"
                          },
                          {
                              "bullet_type":  "BULLET_TYPE_HARD_ATTACK",
                              "name":  "WORDS_TYPE_BULLET_NAME",
                              "speed":  60,
+                             "damage":  5,
                              "color0":  0,
                              "color1":  0,
                              "color2":  0.8,
-                             "scale":  0.3,
+                             "scale":  0.5,
                              "bullet_boom_words_type":  "WORDS_TYPE_BULLET_BOOM"
                          }
                      ]

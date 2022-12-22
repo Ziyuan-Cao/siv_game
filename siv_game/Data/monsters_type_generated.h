@@ -28,12 +28,14 @@ struct monster FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_NAME = 6,
     VT_HP = 8,
     VT_SPEED = 10,
-    VT_COLOR0 = 12,
-    VT_COLOR1 = 14,
-    VT_COLOR2 = 16,
-    VT_SCALE = 18,
-    VT_MONSTER_ATTACK_WORDS_TYPE = 20,
-    VT_MONSTER_WAS_HIT_WORDS_TYPE = 22
+    VT_DAMAGE = 12,
+    VT_SCORE_VALUE = 14,
+    VT_COLOR0 = 16,
+    VT_COLOR1 = 18,
+    VT_COLOR2 = 20,
+    VT_SCALE = 22,
+    VT_MONSTER_ATTACK_WORDS_TYPE = 24,
+    VT_MONSTER_WAS_HIT_WORDS_TYPE = 26
   };
   const flatbuffers::String *monster_type() const {
     return GetPointer<const flatbuffers::String *>(VT_MONSTER_TYPE);
@@ -46,6 +48,12 @@ struct monster FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   int16_t speed() const {
     return GetField<int16_t>(VT_SPEED, 1);
+  }
+  int16_t damage() const {
+    return GetField<int16_t>(VT_DAMAGE, 1);
+  }
+  int16_t score_value() const {
+    return GetField<int16_t>(VT_SCORE_VALUE, 1);
   }
   float color0() const {
     return GetField<float>(VT_COLOR0, 0.8f);
@@ -73,6 +81,8 @@ struct monster FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            verifier.VerifyString(name()) &&
            VerifyField<int16_t>(verifier, VT_HP, 2) &&
            VerifyField<int16_t>(verifier, VT_SPEED, 2) &&
+           VerifyField<int16_t>(verifier, VT_DAMAGE, 2) &&
+           VerifyField<int16_t>(verifier, VT_SCORE_VALUE, 2) &&
            VerifyField<float>(verifier, VT_COLOR0, 4) &&
            VerifyField<float>(verifier, VT_COLOR1, 4) &&
            VerifyField<float>(verifier, VT_COLOR2, 4) &&
@@ -100,6 +110,12 @@ struct monsterBuilder {
   }
   void add_speed(int16_t speed) {
     fbb_.AddElement<int16_t>(monster::VT_SPEED, speed, 1);
+  }
+  void add_damage(int16_t damage) {
+    fbb_.AddElement<int16_t>(monster::VT_DAMAGE, damage, 1);
+  }
+  void add_score_value(int16_t score_value) {
+    fbb_.AddElement<int16_t>(monster::VT_SCORE_VALUE, score_value, 1);
   }
   void add_color0(float color0) {
     fbb_.AddElement<float>(monster::VT_COLOR0, color0, 0.8f);
@@ -136,6 +152,8 @@ inline flatbuffers::Offset<monster> Createmonster(
     flatbuffers::Offset<flatbuffers::String> name = 0,
     int16_t hp = 10,
     int16_t speed = 1,
+    int16_t damage = 1,
+    int16_t score_value = 1,
     float color0 = 0.8f,
     float color1 = 0.6f,
     float color2 = 0.4f,
@@ -151,6 +169,8 @@ inline flatbuffers::Offset<monster> Createmonster(
   builder_.add_color0(color0);
   builder_.add_name(name);
   builder_.add_monster_type(monster_type);
+  builder_.add_score_value(score_value);
+  builder_.add_damage(damage);
   builder_.add_speed(speed);
   builder_.add_hp(hp);
   return builder_.Finish();
@@ -162,6 +182,8 @@ inline flatbuffers::Offset<monster> CreatemonsterDirect(
     const char *name = nullptr,
     int16_t hp = 10,
     int16_t speed = 1,
+    int16_t damage = 1,
+    int16_t score_value = 1,
     float color0 = 0.8f,
     float color1 = 0.6f,
     float color2 = 0.4f,
@@ -178,6 +200,8 @@ inline flatbuffers::Offset<monster> CreatemonsterDirect(
       name__,
       hp,
       speed,
+      damage,
+      score_value,
       color0,
       color1,
       color2,

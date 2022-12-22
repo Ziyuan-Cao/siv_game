@@ -108,7 +108,7 @@
                        {
                            "word_type":  "WORDS_TYPE_GAME_OVER_TITLE_NAME",
                            "japanese":  "終わり",
-                           "cantonese":  "搞掂",
+                           "cantonese":  "着草",
                            "english":  "Game OVER",
                            "unknow":  "OvO"
                        },
@@ -136,7 +136,7 @@
                        {
                            "word_type":  "WORDS_TYPE_SCORE_NAME",
                            "japanese":  "点数",
-                           "cantonese":  "成绩",
+                           "cantonese":  "成績",
                            "english":  "Score",
                            "unknow":  "Score"
                        },

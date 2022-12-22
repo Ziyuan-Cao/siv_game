@@ -96,9 +96,11 @@ struct s_object
 struct s_monster : public s_object<Box>
 {
 	MONSTER_TYPE monster_type = MONSTER_TYPE_NORMAL;
-	int hp = 10;
+	int hp = 1;
 	int speed = 1;
+	int damage = 1;
 	int search_radius = 10;
+	int score_value = 1;
 	float standby_time = 3; // standby time
 
 	WORDS_TYPE monster_attack_words_type = WORDS_TYPE_MONSTER_ATTACK;
@@ -126,6 +128,8 @@ struct s_monster : public s_object<Box>
 		monster_type = in_monster.monster_type;
 		hp = in_monster.hp;
 		speed = in_monster.speed;
+		damage = in_monster.damage;
+		score_value = in_monster.score_value;
 		color[0] = in_monster.color[0];
 		color[1] = in_monster.color[1];
 		color[2] = in_monster.color[2];
@@ -141,6 +145,8 @@ struct s_monster : public s_object<Box>
 		res_monster.monster_type = in_monster.monster_type;
 		res_monster.hp = in_monster.hp;
 		res_monster.speed = in_monster.speed;
+		res_monster.damage = in_monster.damage;
+		res_monster.score_value = in_monster.score_value;
 		res_monster.color[0] = in_monster.color[0];
 		res_monster.color[1] = in_monster.color[1];
 		res_monster.color[2] = in_monster.color[2];
@@ -158,7 +164,7 @@ struct s_player : public s_object<Sphere>
 	PLAYER_TYPE player_type = PLAYER_TYPE_NORMAL;
 	int hp = 10;
 	int speed = 10;
-	int bullet_number = 10;
+	int bullet_number = 50;
 
 	WORDS_TYPE player_attack_words_type = WORDS_TYPE_PLAYER_ATTACK;
 	WORDS_TYPE player_hard_attack_words_type = WORDS_TYPE_PLAYER_HARD_ATTACK;
@@ -221,6 +227,7 @@ struct s_bullet : public s_object<Sphere>
 {
 	BULLET_TYPE bullet_type = BULLET_TYPE_NORMAL;
 	int speed = 20;
+	int damage = 1;
 	double move_dir[3] = { 0,0,0 };
 
 	WORDS_TYPE bullet_boom_words_type = WORDS_TYPE_BULLET_BOOM;
@@ -244,6 +251,7 @@ struct s_bullet : public s_object<Sphere>
 		bullet_type = in_bullet.bullet_type;
 		name = in_bullet.name;
 		speed = in_bullet.speed;
+		damage = in_bullet.damage;
 		color[0] = in_bullet.color[0];
 		color[1] = in_bullet.color[1];
 		color[2] = in_bullet.color[2];
@@ -257,6 +265,7 @@ struct s_bullet : public s_object<Sphere>
 		res_bullet.bullet_type = in_bullet.bullet_type;
 		res_bullet.name = in_bullet.name;
 		res_bullet.speed = in_bullet.speed;
+		res_bullet.damage = in_bullet.damage;
 		res_bullet.color[0] = in_bullet.color[0];
 		res_bullet.color[1] = in_bullet.color[1];
 		res_bullet.color[2] = in_bullet.color[2];
@@ -269,7 +278,7 @@ struct s_bullet : public s_object<Sphere>
 	s_command* bullet_behavior_tree_cmd = nullptr;
 };
 
-struct s_item : public s_object<Box>
+struct s_item : public s_object<Sphere>
 {
 	ITEM_TYPE item_type = ITEM_TYPE_ADD_HP;
 	float item_data = 10;

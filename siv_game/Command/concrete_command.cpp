@@ -299,6 +299,8 @@ void player_attack_command::execute()
 	//hard attack
 	if (hard_atteck)
 	{
+		count_time_start = 0;
+
 		Ray mouse_ray = sence_ptr->camera_ptr->screenToRay(Cursor::Pos());
 
 		auto result = mouse_ray.intersectsAt(Plane(0, 2, 0, 1024));
@@ -396,15 +398,16 @@ void check_collision_command::execute()
 	//bullet move & collision
 	for (auto it = sence_ptr->bullet_group.begin();it != sence_ptr->bullet_group.end();)
 	{
-		if ((*it)->bullet_behavior_tree_cmd) (*it)->bullet_behavior_tree_cmd->execute();
+		s_bullet* bullet_ptr = *it;
+		if (bullet_ptr->bullet_behavior_tree_cmd) bullet_ptr->bullet_behavior_tree_cmd->execute();
 
 		//monster map bullet collision
-		auto & monster_set = sence_ptr->get_monster_map_set((*it)->position[0], (*it)->position[2]);
+		auto & monster_set = sence_ptr->get_monster_map_set(bullet_ptr->position[0], bullet_ptr->position[2]);
 		bool is_hit = false;
 		for (auto itt = monster_set.begin(); itt != monster_set.end();)
 		{
 			s_monster* monster_ptr = *itt;
-			if ((*it)->mesh.intersects(monster_ptr->mesh))
+			if (bullet_ptr->mesh.intersects(monster_ptr->mesh))
 			{
 				//add atk text
 				auto screen_pos = sence_ptr->camera_ptr->worldToScreenPoint({ monster_ptr->position[0] ,monster_ptr->position[1] ,monster_ptr->position[2]});
@@ -413,13 +416,18 @@ void check_collision_command::execute()
 				add_text_command add_text_cmd(sence_ptr, text_atk, time_ptr->total_time(), screen_pos.x, screen_pos.y);
 				add_text_cmd.execute();
 
+				monster_ptr->hp -= bullet_ptr->damage;
+				monster_ptr->color[0] += 0.5 * bullet_ptr->damage;
+				is_hit = true;
+			}
+			//hp below with zero
+			if (monster_ptr->hp < 0)
+			{
+				sence_ptr->score += monster_ptr->score_value;
 				sence_ptr->monster_group.erase(monster_ptr);
 				itt = monster_set.erase(itt);
 				delete monster_ptr;
-				is_hit = true;
-				sence_ptr->score++;
-				break;
-				
+				continue;
 			}
 			else
 			{
@@ -428,13 +436,12 @@ void check_collision_command::execute()
 		}
 
 		//销毁
-		if (is_hit
-		|| (*it)->position[0] > sence_ptr->map_width
-		|| (*it)->position[0] < -sence_ptr->map_width
-		|| (*it)->position[2] > sence_ptr->map_length
-		|| (*it)->position[2] < -sence_ptr->map_length)
+		if ((is_hit && bullet_ptr->bullet_type != BULLET_TYPE_SHOTGUN)
+		|| bullet_ptr->position[0] > sence_ptr->map_width
+		|| bullet_ptr->position[0] < -sence_ptr->map_width
+		|| bullet_ptr->position[2] > sence_ptr->map_length
+		|| bullet_ptr->position[2] < -sence_ptr->map_length)
 		{
-			s_bullet* bullet_ptr = *it;
 			//add atk text
 			auto screen_pos = sence_ptr->camera_ptr->worldToScreenPoint({ bullet_ptr->position[0] ,bullet_ptr->position[1] ,bullet_ptr->position[2] });
 			s_text text_boom;
@@ -467,13 +474,15 @@ void check_collision_command::execute()
 			add_text_command add_text_cmd(sence_ptr, text_hit, time_ptr->total_time(), screen_pos.x, screen_pos.y);
 			add_text_cmd.execute();
 
+			sence_ptr->player->hp -= monster_ptr->damage;
+			sence_ptr->score++;
+
 			sence_ptr->monster_group.erase(monster_ptr);
 			itt = monster_set.erase(itt);
 
 			delete monster_ptr;
 
-			sence_ptr->player->hp--;
-			sence_ptr->score++;
+
 		}
 		else
 		{

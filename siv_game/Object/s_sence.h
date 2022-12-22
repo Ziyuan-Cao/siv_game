@@ -38,7 +38,7 @@ struct s_sence
 		player->update_state();
 		level_map = new s_map();
 		player->position[1] = 2;
-		level_map->scale = map_width * 2 +4;
+		level_map->scale = map_width * 2 + 4;
 		level_map->update_state();
 	}
 
