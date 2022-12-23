@@ -50,15 +50,40 @@ void game_logic::loop()
 	s_factory* factory_ptr = s_factory::get_instance();
 
 	//init gpu
-	const ColorF backgroundColor = ColorF{ 0.4, 0.6, 0.8 }.removeSRGBCurve();
-	const MSRenderTexture renderTexture{ Scene::Size(), TextureFormat::R8G8B8A8_Unorm_SRGB, HasDepth::Yes };
+	//shadow
+	struct light_data
+	{
+		Float3 light_color;
+		Float3 light_direction;
+		Mat4x4 shadow_transfrom;
+	};
 
-	BasicCamera3D camera_3d(renderTexture.size(), 40_deg, Vec3{ 10, 16, -32 });
+	const MSRenderTexture light_depth_texture(Scene::Size(), TextureFormat::R32_Float, HasDepth::Yes);
+	BasicCamera3D light_camera{ light_depth_texture.size(), 30_deg, Vec3{ 100, 80, -160 } };
+	const VertexShader shadow_vs = HLSL{ U"shader/shadow_shader.hlsl", U"VS" };
+	const PixelShader shadow_ps = HLSL{ U"shader/shadow_shader.hlsl", U"PS" };
+	//NDC (-1,1) -> (0,1)
+	Mat4x4 T(
+		0.5f, 0.0f, 0.0f, 0.0f,
+		0.0f, -0.5f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.5f, 0.5f, 0.0f, 1.0f);
+	Mat4x4 shadow_tf = -light_camera.getView() * light_camera.getProj() * T;
+
+	ConstantBuffer<light_data> shadow_data_cb{ {{1,1,1},-light_camera.getEyePosition().normalized(),shadow_tf} };
+
+	//game forward light
+	const ColorF background_color = ColorF{ 0.4, 0.6, 0.8 }.removeSRGBCurve();
+	const MSRenderTexture final_render_target{ Scene::Size(), TextureFormat::R8G8B8A8_Unorm_SRGB, HasDepth::Yes };
+
+	BasicCamera3D game_camera(final_render_target.size(), 40_deg, Vec3{ 10, 16, -32 });
+	const VertexShader game_forward_light_vs = HLSL{ U"shader/game_forward_light.hlsl", U"VS" };
+	const PixelShader game_forward_light_ps = HLSL{ U"shader/game_forward_light.hlsl", U"PS" };
 
 	//init game sence
 	s_sence game_sence;
 	game_sence.level_map->update_state();
-	game_sence.camera_ptr = &camera_3d;
+	game_sence.camera_ptr = &game_camera;
 	game_sence.remain_time = 30;
 	game_sence.generate_item_cmd = new generate_item_command(&game_sence);
 	game_sence.generate_monster_cmd = new generate_monster_command(&game_sence);
@@ -118,7 +143,7 @@ void game_logic::loop()
 			check_collision_cmd.execute();
 
 			//camera move (follow player)
-			camera_3d.setView(
+			game_camera.setView(
 				Vec3{ 10, 16, -32 } +
 				Vec3{ game_sence.player->position[0],
 				game_sence.player->position[1],
@@ -126,27 +151,30 @@ void game_logic::loop()
 				Vec3{ game_sence.player->position[0],
 				game_sence.player->position[1],
 				game_sence.player->position[2] });
-			Graphics3D::SetCameraTransform(camera_3d);
 		}
 
-		//3d rendering
+		//shadow
 		{
-			const ScopedRenderTarget3D target{ renderTexture.clear(backgroundColor) };// Clear renderTexture with the background color,// then make renderTexture the render target for the current 3D scene
+			Graphics3D::SetCameraTransform(light_camera);
 
+			const ScopedCustomShader3D light_shader{ shadow_vs, shadow_ps };
+			const ScopedRenderTarget3D light_target{ light_depth_texture.clear({1,1,1}) };
+
+			//draw map
 			game_sence.level_map->draw();
-			//update monster
+			//draw monster
 			for (auto it : game_sence.monster_group)
 			{
 				it->update_state();
 				it->draw();
 			}
-			//update bullet
+			//draw monster
 			for (auto it : game_sence.bullet_group)
 			{
 				it->update_state();
 				it->draw();
 			}
-			//update item
+			//draw monster
 			for (auto it : game_sence.item_group)
 			{
 
@@ -154,16 +182,58 @@ void game_logic::loop()
 				it->draw();
 			}
 
-			//update player
+			//draw player
 			game_sence.player->update_state();
 			game_sence.player->draw();
+
+			Graphics3D::Flush();
+			light_depth_texture.resolve();
+		}
+		//forwar light
+		{
+			Graphics3D::SetCameraTransform(game_camera);
+			const ScopedCustomShader3D shader{ game_forward_light_vs, game_forward_light_ps };
+
+			const ScopedRenderTarget3D target{ final_render_target.clear(background_color) };
+			Graphics3D::SetVSConstantBuffer(4, shadow_data_cb);
+			Graphics3D::SetPSConstantBuffer(4, shadow_data_cb);
+			Graphics3D::SetPSTexture(1, light_depth_texture);
+			const ScopedRenderStates3D ss{ { ShaderStage::Pixel, 1, SamplerState::BorderAniso} };
+
+			//draw map
+			game_sence.level_map->draw();
+			//draw monster
+			for (auto it : game_sence.monster_group)
+			{
+				it->update_state();
+				it->draw();
+			}
+			//draw monster
+			for (auto it : game_sence.bullet_group)
+			{
+				it->update_state();
+				it->draw();
+			}
+			//draw monster
+			for (auto it : game_sence.item_group)
+			{
+
+				it->update_state();
+				it->draw();
+			}
+
+			//draw player
+			game_sence.player->update_state();
+			game_sence.player->draw();
+
+
+			Graphics3D::Flush();
+			final_render_target.resolve();
 		}
 
-		//2d rendering
+		//UI
 		{
-			Graphics3D::Flush();// Flush 3D rendering commands before multisample resolve
-			renderTexture.resolve();// Multisample resolve
-			Shader::LinearToScreen(renderTexture);// Transfer renderTexture to the current 2D scene (default scene)
+			Shader::LinearToScreen(final_render_target);// Transfer renderTexture to the current 2D scene (default scene)
 
 			//update player state
 			display_player_state_command display_player_state_cmd(&game_sence);
