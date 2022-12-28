@@ -1,50 +1,50 @@
-# ƒ{ƒ{ƒ{ | BoomBoomBoom
+# ãƒœãƒœãƒœ | BoomBoomBoom
 
 |               |                                              |
 |:--------------|:---------------------------------------------|
 | Author        | [Cao Ziyuan](https://github.com/Ziyuan-Cao)  |
 | Affiliation   | Siv3D                                        |
 | Siv3D Version | v0.6.5                                       |
-| Platform      | Windows                                   @@|
+| Platform      | Windows                                   ã€€ã€€|
 
-## à–¾ | Description
+## èª¬æ˜Ž | Description
 
-**•¨Œê | StoryF**
-- ‚ ‚é“ú“Ë‘RAƒ{[ƒ‹‚ÍƒLƒ…[ƒu‚¾‚¯‚Ì¢ŠE‚É—Ž‚¿‚½...@
+**ç‰©èªž | Storyï¼š**
+- ã‚ã‚‹æ—¥çªç„¶ã€ãƒœãƒ¼ãƒ«ã¯ã‚­ãƒ¥ãƒ¼ãƒ–ã ã‘ã®ä¸–ç•Œã«è½ã¡ãŸ...ã€€
 
--  ƒLƒ…[ƒu‚ÌŒQ‚ê‚É’¼–Ê‚µ‚ÄAƒ{[ƒ‹‚Íí‚¤‚±‚Æ‚ð‘I‚ñ‚¾..
+-  ã‚­ãƒ¥ãƒ¼ãƒ–ã®ç¾¤ã‚Œã«ç›´é¢ã—ã¦ã€ãƒœãƒ¼ãƒ«ã¯æˆ¦ã†ã“ã¨ã‚’é¸ã‚“ã ..
 
-**•`‰æ | RenderingF**
-- ƒOƒ[ƒoƒ‹‰eƒvƒƒZƒX
-- ƒtƒHƒ[ƒhƒ‰ƒCƒeƒBƒ“ƒOƒvƒƒZƒX
+**æç”» | Renderingï¼š**
+- ã‚°ãƒ­ãƒ¼ãƒãƒ«å½±ãƒ—ãƒ­ã‚»ã‚¹
+- ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ãƒ—ãƒ­ã‚»ã‚¹
 
-**ƒfƒUƒCƒ“ | designF**
-- hash map‚É‚æ‚éŒð·”»’è
+**ãƒ‡ã‚¶ã‚¤ãƒ³ | designï¼š**
+- hash mapã«ã‚ˆã‚‹äº¤å·®åˆ¤å®š
 - command Pattern
-- ƒVƒŠƒAƒ‰ƒCƒY‚ÅAŒ¾ŒêAƒvƒŒƒCƒ„[‚Æƒ‚ƒ“ƒXƒ^[‚Ìƒf[ƒ^‚ðƒvƒƒOƒ‰ƒ€‚Æ•ª—£‚·‚éBjson‚Åƒf[ƒ^‚ð’²®‚Å‚«‚é
+- ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã§ã€è¨€èªžã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼ã®ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¨åˆ†é›¢ã™ã‚‹ã€‚jsonã§ãƒ‡ãƒ¼ã‚¿ã‚’èª¿æ•´ã§ãã‚‹
 
-**Œ¾Œê | LanguageF**
-- “ú–{Œê
-- âãŒê
+**è¨€èªž | Languageï¼š**
+- æ—¥æœ¬èªž
+- ç²¤èªž
 - English
 - Unknow
 
-## —V‚Ñ•û | How to Play
+## éŠã³æ–¹ | How to Play
 
-- ¶ƒNƒŠƒbƒN@			UŒ‚
-- [W][A][S][D]@@		ˆÚ“®
-- ƒLƒ…[ƒu‚ª‹ß‚Ã‚­‚Æƒ_ƒ[ƒW‚ðŽó‚¯‚é
-- —F’B‚©‚çƒeƒŒƒ|[ƒg‚³‚ê‚½‹…ó‚Ì¬“¹‹ï‚ªƒ‰ƒ“ƒ_ƒ€‚É’n–Ê‚ÉoŒ»‚·‚é
-- ‹ß‚Ã‚­‚ÆA¬“¹‹ï‚ðE‚¤
+- å·¦ã‚¯ãƒªãƒƒã‚¯ã€€			æ”»æ’ƒ
+- [W][A][S][D]ã€€ã€€		ç§»å‹•
+- ã‚­ãƒ¥ãƒ¼ãƒ–ãŒè¿‘ã¥ãã¨ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹
+- å‹é”ã‹ã‚‰ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã•ã‚ŒãŸçƒçŠ¶ã®å°é“å…·ãŒãƒ©ãƒ³ãƒ€ãƒ ã«åœ°é¢ã«å‡ºç¾ã™ã‚‹
+- è¿‘ã¥ãã¨ã€å°é“å…·ã‚’æ‹¾ã†
 
-## ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg | Screenshots
+## ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆ | Screenshots
 
-![](Screenshot/1.png)
+![](release/Screenshot/1.png)
 
-![](Screenshot/2.png)
+![](release/Screenshot/2.png)
 
-![](Screenshot/3.png)
+![](release/Screenshot/3.png)
 
-![](Screenshot/4.png)
+![](release/Screenshot/4.png)
 
-![](Screenshot/5.png)
+![](release/Screenshot/5.png)
