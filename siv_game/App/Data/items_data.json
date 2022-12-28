@@ -1,0 +1,70 @@
+﻿{
+    "items_data":  [
+                       {
+                           "item_type":  "ITEM_TYPE_ADD_HP",
+                           "name":  "WORDS_TYPE_ITEM_NAME",
+                           "item_data":  10,
+                           "time":  10,
+                           "color0":  0.9,
+                           "color1":  0,
+                           "color2":  0,
+                           "scale":  0.5,
+                           "item_was_picked_words_type":  "WORDS_TYPE_ITEM_WAS_PICKED"
+                       },
+                       {
+                           "item_type":  "ITEM_TYPE_ADD_BULLET",
+                           "name":  "WORDS_TYPE_ITEM_NAME",
+                           "item_data":  50,
+                           "time":  10,
+                           "color0":  0.9,
+                           "color1":  0.9,
+                           "color2":  0,
+                           "scale":  0.5,
+                           "item_was_picked_words_type":  "WORDS_TYPE_ITEM_WAS_PICKED"
+                       },
+                       {
+                           "item_type":  "ITEM_TYPE_ADD_TIME",
+                           "name":  "WORDS_TYPE_ITEM_NAME",
+                           "item_data":  20,
+                           "time":  10,
+                           "color0":  0,
+                           "color1":  0,
+                           "color2":  0.3,
+                           "scale":  0.5,
+                           "item_was_picked_words_type":  "WORDS_TYPE_ITEM_WAS_PICKED"
+                       },
+                       {
+                           "item_type":  "ITEM_TYPE_BULLET_UNLIMITED",
+                           "name":  "WORDS_TYPE_ITEM_NAME",
+                           "item_data":  5,
+                           "time":  10,
+                           "color0":  0,
+                           "color1":  0,
+                           "color2":  0.9,
+                           "scale":  0.5,
+                           "item_was_picked_words_type":  "WORDS_TYPE_ITEM_WAS_PICKED"
+                       },
+                       {
+                           "item_type":  "ITEM_TYPE_BULLET_FIREWORKS",
+                           "name":  "WORDS_TYPE_ITEM_NAME",
+                           "item_data":  5,
+                           "time":  10,
+                           "color0":  0.3,
+                           "color1":  0,
+                           "color2":  0,
+                           "scale":  0.5,
+                           "item_was_picked_words_type":  "WORDS_TYPE_ITEM_WAS_PICKED"
+                       },
+                       {
+                           "item_type":  "ITEM_TYPE_BULLET_SHOTGUN",
+                           "name":  "WORDS_TYPE_ITEM_NAME",
+                           "item_data":  3,
+                           "time":  10,
+                           "color0":  0,
+                           "color1":  0.9,
+                           "color2":  0,
+                           "scale":  0.5,
+                           "item_was_picked_words_type":  "WORDS_TYPE_ITEM_WAS_PICKED"
+                       }
+                   ]
+}

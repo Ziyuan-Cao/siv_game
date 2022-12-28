@@ -167,7 +167,7 @@ float3 CalculateSpecularReflection(float3 n, float3 h, float shininess, float nl
 
 float4 PS(s3d::PSInput input) : SV_TARGET
 {
-	const float3 lightColor = g_sunColor;
+	const float3 lightColor = g_Color;
 	const float3 lightDirection = g_Direction;
 	//const float3 lightColor = g_sunColor;
 	//const float3 lightDirection = g_sunDirection;
@@ -189,9 +189,11 @@ float4 PS(s3d::PSInput input) : SV_TARGET
 
 	float ndotl = max(dot(n, l), 0.0f);
 
-	float shadow_value = min(1 - ndotl, shadow_face);
+	float shadow_value = min(ndotl, shadow_face);
 
-	//return shadow_value;
+	shadow_value = normalize(shadow_value);
 
-	return float4((diffuseReflection + specularReflection + g_emissionColor) * max(shadow_value * 2,0.2), diffuseColor.a);
+	//return shadow_face;
+
+	return float4((diffuseReflection + specularReflection + g_emissionColor) * max(shadow_face,0.6), diffuseColor.a);
 }

@@ -142,10 +142,10 @@
                        },
                        {
                            "word_type":  "WORDS_TYPE_GAME_TITLE_NAME",
-                           "japanese":  "戦闘",
-                           "cantonese":  "打交",
-                           "english":  "Battle",
-                           "unknow":  "FIGHT!"
+                           "japanese":  "ボボボ!\n",
+                           "cantonese":  "打交!",
+                           "english":  "BoomBoomBoom!",
+                           "unknow":  "BBBB!"
                        }
                    ]
 }

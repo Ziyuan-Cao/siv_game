@@ -643,7 +643,7 @@ void display_player_state_command::execute()
 
 		auto score_font = SimpleGUI::GetFont();
 		score_font.setBufferThickness(3);
-		score_font(score_words).draw(600, 10, ColorF({ 0.0,0.0,0.0 }));
+		score_font(score_words).draw(630, 10, ColorF({ 0.0,0.0,0.0 }));
 	}
 	//special gun remain time
 	{
@@ -654,7 +654,7 @@ void display_player_state_command::execute()
 
 			auto remain_font = SimpleGUI::GetFont();
 			remain_font.setBufferThickness(3);
-			remain_font(remain_words).draw(600, 30, ColorF({ 0.0,0.0,0.0 }));
+			remain_font(remain_words).draw(630, 30, ColorF({ 0.0,0.0,0.0 }));
 		}
 	}
 
@@ -666,7 +666,7 @@ void display_player_state_command::execute()
 
 		auto time_font = SimpleGUI::GetFont();
 		time_font.setBufferThickness(3);
-		time_font(time_words).draw(800, 10, ColorF({ 0.0,0.0,0.0 }));
+		time_font(time_words).draw(1100, 10, ColorF({ 0.0,0.0,0.0 }));
 	}
 
 	

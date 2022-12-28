@@ -1,0 +1,151 @@
+﻿{
+    "words_data":  [
+                       {
+                           "word_type":  "WORDS_TYPE_MONSTER_ATTACK",
+                           "japanese":  "へへ～",
+                           "cantonese":  "顶你",
+                           "english":  "ATTACK!",
+                           "unknow":  "LOL\u003e\u003e\u003e^^"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_MONSTER_WAS_HIT",
+                           "japanese":  "わあ！",
+                           "cantonese":  "米啊！",
+                           "english":  "HIT!",
+                           "unknow":  "P...AW!"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_PLAYER_ATTACK",
+                           "japanese":  "しゃしゃしゃ！",
+                           "cantonese":  "嘿嘿",
+                           "english":  "Fire!",
+                           "unknow":  "\u003e \u003c!"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_PLAYER_HARD_ATTACK",
+                           "japanese":  "ああああああああああ！",
+                           "cantonese":  "吖吖吖啊啊啊啊",
+                           "english":  "HARD ATTACK!",
+                           "unknow":  "ADIH!"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_PLAYER_WAS_HIT",
+                           "japanese":  "ェや..",
+                           "cantonese":  "呃啊",
+                           "english":  "Help!",
+                           "unknow":  "QAQ"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_BULLET_BOOM",
+                           "japanese":  "ブーム。",
+                           "cantonese":  "⑧",
+                           "english":  "BOOM",
+                           "unknow":  "\u003c^^\u003e"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_ITEM_WAS_PICKED",
+                           "japanese":  "ほーれ",
+                           "cantonese":  "喾囖",
+                           "english":  "PICKED",
+                           "unknow":  "SSDD"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_MONSTER_NAME",
+                           "japanese":  "怪獣",
+                           "cantonese":  "蛋散",
+                           "english":  "MONSTER",
+                           "unknow":  "MOM"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_PLAYER_NAME",
+                           "japanese":  "俺",
+                           "cantonese":  "超人",
+                           "english":  "PLAYER",
+                           "unknow":  "POP"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_BULLET_NAME",
+                           "japanese":  "弾",
+                           "cantonese":  "家伙",
+                           "english":  "BULLET",
+                           "unknow":  "WEAPON^!"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_ITEM_NAME",
+                           "japanese":  "補充",
+                           "cantonese":  "大保健",
+                           "english":  "ITEM",
+                           "unknow":  "ITEM-\u003eAAD"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_LANGUAGE_NAME",
+                           "japanese":  "日本語",
+                           "cantonese":  "粤語",
+                           "english":  "English",
+                           "unknow":  "@#$\u003e?.%"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_START_GAME_BUTTON_NAME",
+                           "japanese":  "開始！",
+                           "cantonese":  "开片！",
+                           "english":  "Start！",
+                           "unknow":  "KKKK！"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_EXIT_GAME_BUTTON_NAME",
+                           "japanese":  "終了",
+                           "cantonese":  "走了",
+                           "english":  "Exit",
+                           "unknow":  "run"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_RETURN_MAIN_MENU_BUTTON_NAME",
+                           "japanese":  "帰る",
+                           "cantonese":  "唔打了",
+                           "english":  "Back",
+                           "unknow":  "back"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_GAME_OVER_TITLE_NAME",
+                           "japanese":  "終わり",
+                           "cantonese":  "着草",
+                           "english":  "Game OVER",
+                           "unknow":  "OvO"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_PLAYER_STATE_HP_NAME",
+                           "japanese":  "命",
+                           "cantonese":  "条血",
+                           "english":  "HP",
+                           "unknow":  "RED"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_PLAYER_STATE_BULLET_NUMBER_NAME",
+                           "japanese":  "玉数",
+                           "cantonese":  "子弹",
+                           "english":  "Clip",
+                           "unknow":  "🥚"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_PLAYER_STATE_TIME_NAME",
+                           "japanese":  "時間",
+                           "cantonese":  "钟",
+                           "english":  "Time",
+                           "unknow":  "⏰"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_SCORE_NAME",
+                           "japanese":  "点数",
+                           "cantonese":  "成績",
+                           "english":  "Score",
+                           "unknow":  "Score"
+                       },
+                       {
+                           "word_type":  "WORDS_TYPE_GAME_TITLE_NAME",
+                           "japanese":  "ボボボ!\n",
+                           "cantonese":  "打交!",
+                           "english":  "BoomBoomBoom!",
+                           "unknow":  "BBBB!"
+                       }
+                   ]
+}

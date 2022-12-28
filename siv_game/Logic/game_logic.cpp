@@ -70,7 +70,7 @@ void game_logic::loop()
 		0.5f, 0.5f, 0.0f, 1.0f);
 	Mat4x4 shadow_tf = -light_camera.getView() * light_camera.getProj() * T;
 
-	ConstantBuffer<light_data> shadow_data_cb{ {{1,1,1},-light_camera.getEyePosition().normalized(),shadow_tf} };
+	ConstantBuffer<light_data> shadow_data_cb{ {{ 1,0.9,0.8},-light_camera.getEyePosition().normalized(),shadow_tf} };
 
 	//game forward light
 	const ColorF background_color = ColorF{ 0.4, 0.6, 0.8 }.removeSRGBCurve();
@@ -88,12 +88,19 @@ void game_logic::loop()
 	game_sence.generate_item_cmd = new generate_item_command(&game_sence);
 	game_sence.generate_monster_cmd = new generate_monster_command(&game_sence);
 	game_sence.player->player_control_cmd = new player_control_command(game_sence.player, &game_sence);
-	
+
+
 
 	//reset time
 	s_timer::get_instance()->reset();
 	s_timer::get_instance()->start();
-	
+
+
+	System::Update();
+	shadow_data_cb->light_color = { 1,0.9,0.8 };
+	shadow_data_cb->light_direction = -light_camera.getEyePosition().normalized();
+	shadow_data_cb->shadow_transfrom = shadow_tf;
+
 
 	while (System::Update())
 	{
@@ -101,6 +108,9 @@ void game_logic::loop()
 		{
 			//time float
 			s_timer::get_instance()->tick();
+
+			//Mat4x4::Rotate(Vec3{ 0,1,0 }, (s_timer::get_instance()->detail_time() * 10_deg),);
+
 
 			//remain time--
 			game_sence.remain_time -= s_timer::get_instance()->detail_time();
@@ -254,7 +264,7 @@ void game_logic::loop()
 		}
 
 		//check button
-		if (SimpleGUI::Button(factory_ptr->get_words_siv_string(WORDS_TYPE_RETURN_MAIN_MENU_BUTTON_NAME), Vec2{ 1100, 20 }))
+		if (SimpleGUI::Button(factory_ptr->get_words_siv_string(WORDS_TYPE_RETURN_MAIN_MENU_BUTTON_NAME), Vec2{ 1150, 50 }))
 		{
 			current_logic = main_logic::get_instance();
 			return;
