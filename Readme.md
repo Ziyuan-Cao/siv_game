@@ -9,6 +9,9 @@
 
 ## 説明 | Description
 
+**ゲーム | Game：**
+- Game 本体はrelease.zipにある
+
 **物語 | Story：**
 - ある日突然、ボールはキューブだけの世界に落ちた...　
 
@@ -39,12 +42,12 @@
 
 ## スクリーンショット | Screenshots
 
-![](release/Screenshot/1.png)
+![image](https://user-images.githubusercontent.com/55373014/209770910-503a242a-66c8-4217-af18-0fce3a2a0114.png)
 
-![](release/Screenshot/2.png)
+![image](https://user-images.githubusercontent.com/55373014/209770934-b934f6d4-7e3a-48b9-9cd4-e82a91a45484.png)
 
-![](release/Screenshot/3.png)
+![image](https://user-images.githubusercontent.com/55373014/209770949-2805e353-30ce-4cc6-83a2-a224f5441882.png)
 
-![](release/Screenshot/4.png)
+![image](https://user-images.githubusercontent.com/55373014/209770975-afbad270-33ca-429c-a7c9-d66aa52b78bb.png)
 
-![](release/Screenshot/5.png)
+![image](https://user-images.githubusercontent.com/55373014/209771007-ad0f1775-169d-47fa-b6a2-006204097c41.png)
